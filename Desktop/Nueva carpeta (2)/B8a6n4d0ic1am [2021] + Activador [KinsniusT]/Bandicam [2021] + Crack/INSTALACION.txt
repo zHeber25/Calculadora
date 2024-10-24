@@ -1,0 +1,10 @@
+-------------------------------------------------------------------
+1-Copia el parche y Llevarlo a la ruta de instalacion del programa por defecto En Disco Local C/Archivos de Programa (x86)/Bandicam
+  una vez pegado Keymaker y Loader inicias el parche Keymaker en modo administrador y damos la opcion PATCH nos pedira nuestro corre el parche para el registro ponemos uno
+  Falso.
+
+2-inicias El bandicam Desde Loader Siempre para que no se Descrake el Programa y listo Ya tendremos Bandicam full activado
+
+3-A Grabar y disfrutar!
+
+By KinsniusT.
