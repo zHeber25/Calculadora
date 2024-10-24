@@ -1,0 +1,9 @@
+body {
+    background-color: brown;
+}
+nav ul {
+    background-color: bisque;
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #a0e9f7, #fbc1cc);
+        }
+
+        .calculadora {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #resultado {
+            width: 100%;
+            height: 80px;
+            background: #e9f5f8;
+            border: none;
+            border-radius: 10px;
+            text-align: right;
+            padding: 20px;
+            font-size: 36px;
+            color: #333;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        button:active {
+            background-color: #ddd;
+            transform: scale(0.98);
+        }
+
+        button.operador {
+            background-color: #fbc1cc;
+            color: white;
+        }
+
+        button.igual {
+            background-color: #a0e9f7;
+            color: white;
+            grid-column: span 2;
+        }
+
+        button.clear {
+            background-color: #ff7675;
+            color: white;
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" id="resultado" disabled>
+        <div class="botones">
+            <button onclick="clearScreen()" class="clear">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="addInput('%')" class="operador">%</button>
+            <button onclick="addInput('/')" class="operador">/</button>
+            <button onclick="addInput('7')">7</button>
+            <button onclick="addInput('8')">8</button>
+            <button onclick="addInput('9')">9</button>
+            <button onclick="addInput('*')" class="operador">×</button>
+            <button onclick="addInput('4')">4</button>
+            <button onclick="addInput('5')">5</button>
+            <button onclick="addInput('6')">6</button>
+            <button onclick="addInput('-')" class="operador">-</button>
+            <button onclick="addInput('1')">1</button>
+            <button onclick="addInput('2')">2</button>
+            <button onclick="addInput('3')">3</button>
+            <button onclick="addInput('+')" class="operador">+</button>
+            <button onclick="addInput('0')" class="zero">0</button>
+            <button onclick="addInput('.')">.</button>
+            <button onclick="calculateResult()" class="igual">=</button>
+        </div>
+    </div>
+
+    <script>
+        function addInput(value) {
+            document.getElementById('resultado').value += value;
+        }
+
+        function clearScreen() {
+            document.getElementById('resultado').value = '';
+        }
+
+        function deleteLast() {
+            let current = document.getElementById('resultado').value;
+            document.getElementById('resultado').value = current.slice(0, -1);
+        }
+
+        function calculateResult() {
+            let expression = document.getElementById('resultado').value;
+            try {
+                document.getElementById('resultado').value = eval(expression);
+            } catch (e) {
+                document.getElementById('resultado').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
