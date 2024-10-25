@@ -1,150 +1,162 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora</title>
-  <style>
-    
-    .calculator {
-      width: 350px;
-      height: 350px;
-      background: linear-gradient(135deg, #00a2ff, #ff00ea);
-      border-radius: 15px;
-      box-shadow: 0px 4px 20px rgba(44, 61, 158, 0.452);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .display {
-      width: 100%;
-      height: 50px;
-      background-color: #fff;
-      border-radius: 10px;
-      text-align: right;
-      font-size: 1.5rem;
-      padding: 5px;
-      box-shadow: inset 0px 4px 10px rgba(151, 27, 27, 0.1);
-      margin-bottom: 15px;
-    }
-
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .button {
-      background-color: #00b7ff;
-      border: none;
-      border-radius: 10px;
-      padding: 15px;
-      font-size: 1.2rem;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .button:hover {
-      background-color: #006eff;
-    }
-
-    .button:active {
-      transform: scale(0.95);
-    }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #222;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
 
-  <div class="calculator">
-   
-    <div class="display" id="display">0</div>
+body {
+    min-height: 100vh;
+    background-color: #232323;
+    display: grid;
+    place-items: center;
+}
+.calculadora {
+background-color: #48bfff;
+color: white;
+width: 350px;
+max-width: 100%;
+padding: 1.5rem;
+border-radius: 1rem;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: .5rem;
+box-shadow: 0 0 20px #48bfff
+}
 
-    <div class="buttons">
-      <button class="button" onclick="appendNumber('7')">7</button>
-      <button class="button" onclick="appendNumber('8')">8</button>
-      <button class="button" onclick="appendNumber('9')">9</button>
-      <button class="button" onclick="setOperation('/')">÷</button>
+#display {
+    grid-column: 1 / 5;
+    background-color: #090c31;
+    padding: 1.5rem;
+    font-size: 2rem;
+    text-align: right;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    font-family: monospace;
+    font-weight: bold;
+}
 
-      <button class="button" onclick="appendNumber('4')">4</button>
-      <button class="button" onclick="appendNumber('5')">5</button>
-      <button class="button" onclick="appendNumber('6')">6</button>
-      <button class="button" onclick="setOperation('*')">×</button>
+.button {
+    background-color: #006da7;
+    color: white;
+    border: 0;
+    padding: 1.5rem .5rem;
+    display: flex;
+    justify-content: center;
+    border-radius: .5rem;
+    cursor: pointer;
 
-      <button class="button" onclick="appendNumber('1')">1</button>
-      <button class="button" onclick="appendNumber('2')">2</button>
-      <button class="button" onclick="appendNumber('3')">3</button>
-      <button class="button" onclick="setOperation('-')">−</button>
+}
 
-      <button class="button" onclick="appendNumber('0')">0</button>
-      <button class="button" onclick="clearDisplay()">C</button>
-      <button class="button" onclick="calculate()">=</button>
-      <button class="button" onclick="setOperation('+')">+</button>
+.btn:hover {
+background-color: #004f78;
+font-weight: bold;
+
+}
+
+#cero {
+    grid-column: span 2;
+
+}
+
+#igual {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    background-color: #e65766;
+
+}
+
+#igual:hover {
+    background-color: #e6394a;
+
+}
+
+    </style>
+
+    <div class="calculadora">
+
+        <div class="display" id="display">0</div>
+
+        <button class="button" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="appendNumber('←')">←</button>
+        <button class="button" onclick="appendNumber('/')">/</button>
+        <button class="button" onclick="setOperation('*')">*</button>
+        <button class="button" onclick="appendNumber('7')">7</button>
+        <button class="button" onclick="appendNumber('8')">8</button>
+        <button class="button" onclick="appendNumber('9')">9</button>
+        <button class="button" onclick="setOperation('-')">-</button>
+        <button class="button" onclick="appendNumber('4')">4</button>
+        <button class="button" onclick="appendNumber('5')">5</button>
+        <button class="button" onclick="appendNumber('6')">6</button>
+        <button class="button" onclick="setOperation('+')">+</button>
+        <button class="button" onclick="appendNumber('1')">1</button>
+        <button class="button" onclick="appendNumber('2')">2</button>
+        <button class="button" onclick="appendNumber('3')">3</button>
+        <button class="button" id=igual onclick="calculate('=')">=</button>
+        <button class="button" id=cero onclick="appendNumber('0')">0</button>
+        <button class="button" onclick="appendNumber('.')">.</button>
     </div>
-  </div>
 
-  <script>
-    let display = document.getElementById('display');
-    let currentInput = '';
-    let firstNumber = null;
-    let operation = null;
-
-    function appendNumber(number) {
-      if (currentInput === '0') currentInput = '';
-      currentInput += number;
-      display.textContent = currentInput;
-    }
-
-    function setOperation(op) {
-      firstNumber = parseFloat(currentInput);
-      operation = op;
-      currentInput = '';
-    }
-
-    function calculate() {
-      if (firstNumber !== null && operation !== null && currentInput !== '') {
-        let secondNumber = parseFloat(currentInput);
-        let result = 0;
-        switch (operation) {
-          case '+':
-            result = firstNumber + secondNumber;
-            break;
-          case '-':
-            result = firstNumber - secondNumber;
-            break;
-          case '*':
-            result = firstNumber * secondNumber;
-            break;
-          case '/':
-            result = firstNumber / secondNumber;
-            break;
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '';
+        let firstNumber = null;
+        let operation = null;
+    
+        function appendNumber(number) {
+          if (currentInput === '0') currentInput = '';
+          currentInput += number;
+          display.textContent = currentInput;
         }
-        display.textContent = result;
-        currentInput = result.toString();
-        firstNumber = null;
-        operation = null;
-      }
-    }
-
-    function clearDisplay() {
-      currentInput = '0';
-      firstNumber = null;
-      operation = null;
-      display.textContent = '0';
-    }
-  </script>
+    
+        function setOperation(op) {
+          firstNumber = parseFloat(currentInput);
+          operation = op;
+          currentInput = '';
+        }
+    
+        function calculate() {
+          if (firstNumber !== null && operation !== null && currentInput !== '') {
+            let secondNumber = parseFloat(currentInput);
+            let result = 0;
+            switch (operation) {
+              case '+':
+                result = firstNumber + secondNumber;
+                break;
+              case '-':
+                result = firstNumber - secondNumber;
+                break;
+              case '*':
+                result = firstNumber * secondNumber;
+                break;
+              case '/':
+                result = firstNumber / secondNumber;
+                break;
+            }
+            display.textContent = result;
+            currentInput = result.toString();
+            firstNumber = null;
+            operation = null;
+          }
+        }
+    
+        function clearDisplay() {
+          currentInput = '0';
+          firstNumber = null;
+          operation = null;
+          display.textContent = '0';
+        }
+      </script>
 
 </body>
 </html>
